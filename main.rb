@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-require 'sinatra'
-require 'dotenv/load'
-require 'telegram/bot'
-require_relative 'lib/handlers/correios'
-
-bot = Telegram::Bot::Client.new(ENV['TELEGRAM_BOT_TOKEN'])
-bot.set_webhook(url: "#{ENV['DOMAIN_URL']}#{ENV['TELEGRAM_BOT_TOKEN']}")
+require_relative 'config/initializers/autoloader'
 
 # Telegram request example
 # {
@@ -45,15 +39,18 @@ post %r{/#{ENV['TELEGRAM_BOT_TOKEN']}} do
   # Regex: anything until reach a space
   route = data['message']['text'].scan(%r{/[^\s]+}).first
 
+  # Get the message text to send to telegram's bot
   response_message = case route
                      when '/address'
                        Handlers::Correios.new(data['message']).to_s
                      end
 
-  bot.send_message(
-    chat_id: data['message']['chat']['id'],
-    text: response_message
-  )
+  if response_message
+    Telegram.bot.send_message(
+      chat_id: data['message']['chat']['id'],
+      text: response_message
+    )
+  end
 
   {} # Return an empty json, to say "ok" to Telegram
 end
