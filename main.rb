@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'config/initializers/autoloader'
+require_relative 'config/application'
 
 # Telegram request example
 # {

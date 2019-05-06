@@ -5,8 +5,8 @@ require 'correios_br'
 module Handlers
   # Public: A class that implements CorreiosBr to use as a handler
   class Correios
-    def initialize(message)
-      @message_text = message['text']
+    def initialize(message_hash = {})
+      @message_text = message_hash['text']
     end
 
     def to_s

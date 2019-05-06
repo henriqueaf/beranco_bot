@@ -1,7 +1,16 @@
 #!/usr/bin/env ruby
 
 require 'irb'
+require 'bundler/setup'
+
+# Require all gems listed on Gemfile
+Bundler.require
+
 require_relative '../config/initializers/autoloader'
+
+# Sinatra actually has a hook on `at_exit` that activates whenever it's
+# included. This setting will supress it.
+set :run, false
 
 def reload!(print = true)
   puts 'Reloading...' if print
