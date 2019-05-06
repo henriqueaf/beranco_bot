@@ -6,7 +6,3 @@ Telegram.bots_config = {
   # Others bot can be accessed with Telegram.bots[:chat]
   # chat: {token: CHAT_BOT_TOKEN, username: 'chatbot'}
 }
-
-Telegram.bot.set_webhook(
-  url: "#{ENV['DOMAIN_URL']}#{ENV['TELEGRAM_BOT_TOKEN']}"
-)
