@@ -42,7 +42,13 @@ class BerancoBot < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  configure :production, :development, :test do
+    enable :logging
+  end
+
   post %r{/#{ENV['TELEGRAM_BOT_TOKEN']}} do
+    logger.info 'Receiving request...'
+
     status 200
 
     # Parse response body to JSON
