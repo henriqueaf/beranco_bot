@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'correios_br', git: 'https://github.com/henriqueaf/correios_br.git'
 gem 'dotenv'
+gem 'pry-byebug'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'telegram-bot'
