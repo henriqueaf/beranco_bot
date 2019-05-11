@@ -4,7 +4,7 @@ require 'irb'
 require 'bundler/setup'
 
 # Require all gems listed on Gemfile
-Bundler.require
+Bundler.require(:default, :development)
 
 require_relative '../config/initializers/autoloader'
 
@@ -20,7 +20,9 @@ def reload!(print = true)
   reload_dirs = %w[lib]
   # Loop trhough and reload every file in all relevant project directories.
   reload_dirs.each do |dir|
-    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each { |f| load(f) }
+    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each do |f|
+      load(f) unless f.include?('lib/main')
+    end
   end
 
   # Return true when complete

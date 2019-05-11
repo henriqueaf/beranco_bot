@@ -4,6 +4,6 @@ require 'dotenv/load'
 require 'bundler'
 
 # Bundle.require execute require on all gems listed on Gemfile
-Bundler.require
+Bundler.require(:default, ENV['RACK_ENV'])
 
 require_relative 'initializers/autoloader'
